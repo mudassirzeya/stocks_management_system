@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block content %}
+    <!-- <h1>Admin</h1> -->
+    <button type="button" class="btn btn-primary btn-circle btn-lg float-right" data-toggle="modal" data-target="#exampleModalCenter">
+        <i class="fa fa-user-plus"></i>
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger" id="exampleModalLongTitle">Add User To Your Company</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'add_user' %}" method="POST">
+                        {% csrf_token %}
+                        <label for="id_first_name">First Name</label>
+                        {{form.first_name}}
+                        <br>
+                        <label for="id_last_name">Lastname</label>
+                        {{form.last_name}}
+                        <br>
+                        <!-- <label for="id_username">Username</label>
+                                        {{form.username}}
+                                        <br> -->
+                        <label for="id_email">Email</label>
+                        {{form.email}}
+                        <br>
+                        <button class="btn btn-warning" type="submit">Add User</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-uppercase text-primary">Your Total Staffs</h5>
+                    <div class="d-flex align-items-center mb-2 mt-4">
+                        <h2 class="mb-0 display-5"><i class="fas fa-users"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal text-danger">{{total}}</span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-uppercase text-primary">Your  Total Inventory </h5>
+                    <div class="d-flex align-items-center mb-2 mt-4">
+                        <h2 class="mb-0 display-5"><i class="fas fa-shopping-cart"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal text-danger">{{total_inventory}}</span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-uppercase text-primary">Company Name</h5>
+                    <div class="d-flex align-items-center mb-2 mt-4">
+                        <h2 class="mb-0 display-5"><i class=" fas fa-th"></i></h2>
+                        <div class="ml-auto">
+                            <h2 class="mb-0 display-6"><span class="font-normal text-danger">{{request.user.company}}</span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Inventory You have added in your Stock.</h4>
+            <!-- <nav id="navbar-example2" class="navbar navbar-light bg-light">
+                <a class="navbar-brand text-muted" href="#">Navbar</a>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#fat">First</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#mdo">Second</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Third with Dropdown</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#one">one</a>
+                            <a class="dropdown-item" href="#two">two</a>
+                            <div role="separator" class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#three">three</a>
+                        </div>
+                    </li> 
+                </ul>
+            </nav> -->
+            <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="position-relative mt-2"
+                style="height: 200px; overflow: auto;">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- <h4 class="card-title">Kitchen Sink</h4>
+                        <h5 class="card-subtitle">Swipe Mode, ModeSwitch, Minimap, Sortable, SortableSwitch</h5> -->
+                        <table class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
+                            data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch>
+                            <thead>
+                                <tr>
+                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist" class="border">
+                                        Inventory Name</th>
+                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col
+                                        data-tablesaw-priority="3" class="border">Quantity</th>
+                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3" class="border">
+                                        Current Price</th>
+                                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border"> Stock Added On 
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for n in all %}                             
+                                <tr>
+                                    <td class="title">
+                                        <a class="link" href="javascript:void(0)">{{n.inventory}}</a>
+                                    </td>
+                                    <td>{{n.quantity}}</td>
+                                    <td>{{n.current_price}}</td>
+                                    <td>{{n.event_date}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.getElementById('id_first_name').classList.add('form-control')
+        document.getElementById('id_last_name').classList.add('form-control')
+        document.getElementById('id_email').classList.add('form-control')
+    </script>
+{% endblock %}

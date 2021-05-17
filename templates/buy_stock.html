@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1 class="text-center text-info">Buy Stock</h1>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-circle btn-lg float-right" data-toggle="modal"
+    data-target="#exampleModalCenter">
+    <i class="fa fa-plus"></i>
+</button>
+<br><br><br>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-info" id="exampleModalLongTitle">Buy Inventory To Your Stock</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">      
+                <form method="POST" action="{% url 'buy_stock' %}">
+                    {% csrf_token %}
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Select Product</label>
+                        {{form.buy_inventory}}
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Quantity</label>
+                        {{form.quantity}}
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Total Invoice</label>
+                        {{form.total_invoice}}
+                    </div>
+                    
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+                
+                
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Inventory You have Buyed to your Stock.</h4>
+        <!-- <nav id="navbar-example2" class="navbar navbar-light bg-light">
+                <a class="navbar-brand text-muted" href="#">Navbar</a>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#fat">First</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#mdo">Second</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Third with Dropdown</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#one">one</a>
+                            <a class="dropdown-item" href="#two">two</a>
+                            <div role="separator" class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#three">three</a>
+                        </div>
+                    </li> 
+                </ul>
+            </nav> -->
+        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="position-relative mt-2"
+            style="height: 200px; overflow: auto;">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <h4 class="card-title">Kitchen Sink</h4>
+                        <h5 class="card-subtitle">Swipe Mode, ModeSwitch, Minimap, Sortable, SortableSwitch</h5> -->
+                    <table class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
+                        data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
+                        data-tablesaw-mode-switch>
+                        <thead>
+                            <tr>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist"
+                                    class="border">
+                                    Inventory Name</th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col
+                                    data-tablesaw-priority="3" class="border">Quantity</th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3" class="border">
+                                    Staff</th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">
+                                    Total Invoice
+                                </th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">
+                                    Stock Added On
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for m in all_buy %}
+                            {% for n in m %}
+                           
+                            <tr>
+                                <td class="title">
+                                    <a class="link" href="javascript:void(0)">{{n.buy_inventory}}</a>
+                                </td>
+                                <td>{{n.quantity}}</td>
+                                <td>{{n.user}}</td>
+                                <td>{{n.total_invoice}}</td>
+                                <td>{{n.event_date}}</td>
+                            </tr>
+                            {% endfor %}
+                            {% endfor %}
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- <div class="d-flex justify-content-center">
+    <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Buy Inventory To Your Stock</h4>
+                <form method="POST" action="{% url 'buy_stock' %}">
+                    { csrf_token }
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Select Product</label>
+                        {{form.buy_inventory}}
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Quantity</label>
+                        {{form.quantity}}
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-danger" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+            { if msg }
+            <div class="alert alert-success" role="alert">
+                {{msg}}
+            </div>
+            { endif }
+        </div>
+    </div>
+</div> -->
+<script>
+    document.getElementById('id_buy_inventory').classList.add('form-control')
+    document.getElementById('id_quantity').classList.add('form-control')
+    document.getElementById('id_quantity').placeholder = "quantity"
+    document.getElementById('id_total_invoice').classList.add('form-control')
+    document.getElementById('id_total_invoice').placeholder = "Total"
+</script>
+{% endblock %}

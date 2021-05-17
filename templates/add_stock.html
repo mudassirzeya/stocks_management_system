@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1 class="text-center text-info">Add Stock</h1>
+<br><br>
+<div class="d-flex justify-content-center">
+<div class="col-sm-12 col-md-6 col-lg-4 ">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Add Inventory To Your Shop's List</h4>
+            <form class="mt-5" method="POST" action="{% url 'add_stock' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{form.inventory}}
+                    <br>
+                    {{form.current_price}}
+                    <!-- <input type="text" class="form-control" id="passtext" placeholder="Inventory"> -->
+                    <br>
+                    <div class="d-flex justify-content-center" >
+                    <button class="btn btn-danger" type="submit">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {% if msg %}
+        <div class="alert alert-success" role="alert">
+            {{msg}}
+        </div>
+        {% endif %}
+    </div>
+</div>
+</div>
+<script>
+    document.getElementById('id_inventory').classList.add('form-control')
+    document.getElementById('id_inventory').placeholder = "Add Products"
+    document.getElementById('id_current_price').classList.add('form-control')
+    document.getElementById('id_current_price').placeholder = "Price"
+</script>
+{% endblock %}
+
+

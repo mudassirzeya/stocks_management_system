@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1 class="text-center text-info">My Users</h1>
+<br>
+{% if myuser %}
+<div class="row"> 
+    {% for u in myuser %}
+    <div class="col-lg-3 col-md-6">
+        <div class="card bg-cyan">
+            <div class="card-body">
+                <div class="d-flex no-block align-items-center">
+                    <div class="text-white">
+                        <h2>{{u.user.first_name}} {{u.user.last_name}}</h2>
+                        <h6>{{u.user.email}}</h6>
+                    </div>
+                    <div class="ml-auto">
+                        {% if u.profile_pic %}
+                        <span class="text-white display-6"><img src="{{u.profile_pic.url}}" alt="" height="40px"></span>
+                        {% else %}
+                        <span class="text-white display-6"><img src="{% static 'images/profile1.jpg' %}" alt="" height="40px"></span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+    
+    
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1 class="text-center text-info">Sell Stock</h1>
+
+<!-- {{json_data}} -->
+{% for obj in json_data %}
+    {{obj.fields}}
+{% endfor %}
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-circle btn-lg float-right" data-toggle="modal"
+    data-target="#exampleModalCenter">
+    <i class="fa fa-plus"></i>
+</button>
+<br><br><br>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-info" id="exampleModalLongTitle">Sell Inventory From Your Stock</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{% url 'sell_stock' %}">
+                    {% csrf_token %}
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Select Product</label>
+                        <select class="form-control" value="select" name="sell_inventory" id="sell_inventory" onchange="selectdata()">
+                            <option value="null" selected disabled hidden>Select</option>
+                            {% for i in inventory %}
+                            <option value="{{i.id}}">{{i.inventory}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group mb-4" id="unit">
+                                <label class="mr-sm-2" for="quantity">Unit Price</label>
+                                <input class="form-control" id="price" type="number" value="">
+                    </div>
+                    
+                    <div class="form-group mb-4" id="quant">
+                        <label class="mr-sm-2" for="quantity">Quantity</label>
+                        <input class="form-control" type="number" name="quantity" id="quantity" placeholder="quantity">
+                    </div>
+                    <h3>Total Bill: <span id="total"></span></h3>
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success" type="submit">Sell</button>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Inventory You have Selled from your Stock.</h4>
+        <!-- <nav id="navbar-example2" class="navbar navbar-light bg-light">
+                <a class="navbar-brand text-muted" href="#">Navbar</a>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#fat">First</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#mdo">Second</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Third with Dropdown</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#one">one</a>
+                            <a class="dropdown-item" href="#two">two</a>
+                            <div role="separator" class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#three">three</a>
+                        </div>
+                    </li> 
+                </ul>
+            </nav> -->
+        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="position-relative mt-2"
+            style="height: 200px; overflow: auto;">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <h4 class="card-title">Kitchen Sink</h4>
+                        <h5 class="card-subtitle">Swipe Mode, ModeSwitch, Minimap, Sortable, SortableSwitch</h5> -->
+                    <table class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
+                        data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
+                        data-tablesaw-mode-switch>
+                        <thead>
+                            <tr>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist"
+                                    class="border">
+                                    Inventory Name</th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col
+                                    data-tablesaw-priority="3" class="border">Quantity</th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col
+                                    data-tablesaw-priority="3" class="border">
+                                    Staff</th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">
+                                    Total Invoice
+                                </th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">
+                                    Stock Added On
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for m in all_sell %}
+                            {% for n in m %}
+
+                            <tr>
+                                <td class="title">
+                                    <a class="link" href="javascript:void(0)">{{n.sell_inventory}}</a>
+                                </td>
+                                <td>{{n.quantity}}</td>
+                                <td>{{n.user}}</td>
+                                <td>{{n.total_invoice}}</td>
+                                <td>{{n.event_date}}</td>
+                            </tr>
+                            {% endfor %}
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    
+    // document.getElementById('id_total_invoice').classList.add('form-control')
+    document.getElementById('quant').style.visibility = "hidden";
+    document.getElementById('unit').style.visibility = "hidden";
+
+    document.getElementById('sell_inventory').addEventListener("change", unhide);
+    // document.getElementById('sell_inventory').addEventListener("change", getdata);
+    document.getElementById('quantity').addEventListener("change", gettotal);
+
+    function unhide(){
+        document.getElementById('quant').style.visibility = "visible";
+        document.getElementById('unit').style.visibility = "visible";
+
+    }
+
+
+
+    // function getdata(){
+    //     var x_data = document.getElementById('id_sell_inventory').value;
+    //     console.log('data: ', x_data);
+    //     var url = '/get_product_price/';
+
+    //     // fetch(url,{
+    //     //     method: "POST",
+    //     //     body: JSON.stringify({
+    //     //         produxt_id = x_data
+    //     //     }),   
+    //     // })
+
+    //     fetch(url, {
+    //         method: "POST",
+    //         body: JSON.stringify({
+    //                 "produxt_id": x_data
+    //             }),
+    //         headers: {
+    //             "Content-type": "application/json",
+    //             'X-CSRFToken': '{{ csrf_token }}'
+    //         }
+    //     }).then((response) => {
+    //         return response.json()
+    //     }).then((data) => {
+    //         console.log("data: ", data);
+    //         var price = 0
+    //         if (data.price != null){
+    //             price = data.price;
+    //         }
+    //         // var xyz = document.getElementById;
+    //         $('#unit').empty();
+    //         $('#unit').append(`
+    //             <label class="mr-sm-2" for="quantity">Unit Price</label>
+    //             <input class="form-control" id="price" type="number" value="${price}">
+    //         `);
+
+    //     });
+
+
+    // }
+    
+    function selectdata(){
+        var data_x = document.getElementById('sell_inventory').value;
+
+        var obj = '{{json_data}}';
+        var string_array = JSON.parse(obj);
+        console.log("string: ",string_array)
+
+        // var json_string = unescape({{inventory | safe | escapejs}});
+        // var json_data = JSON.parse(json_string);
+
+
+
+
+        // var myDjangoList = (("{{json_data |safe}}").replace(/&(l|g|quo)t;/g, function (a, b) {
+        //     return {
+        //         l: '<',
+        //         g: '>',
+        //         quo: '"'
+        //     }[b];
+        // }));
+
+        // myDjangoList = myDjangoList.replace(/u'/g, '\'')
+        // myDjangoList = myDjangoList.replace(/'/g, '\"')
+
+        // myData = JSON.parse(myDjangoList);
+
+        // console.log('data: ', myData)
+
+
+
+
+        // var data = JSON.parse("{{inventory}}");
+        // var dataNode = document.getElementById('price');
+        // // dataNode.value += "{{data|escapejs}}";
+        // // dataNode = document.getElementById('neatdata');
+        
+        // console.log('invent: ', data);
+
+        // for(var x in data){
+        //     if(x['inventory'] == data_x){
+        //         dataNode.value += x['current_price'];
+        //     }
+        // }
+
+        
+       
+        // for(i=0; i<obj.length; i++){
+        //     if(obj==data_x){
+        //         document.getElementById('price').value = obj;
+        //     }
+        // }
+
+    }
+
+    function gettotal(){
+        var price = document.getElementById('price').value;
+        var quant = document.getElementById('id_quantity').value;
+
+        var total = price*quant;
+        console.log("total: ", total)
+        document.getElementById('total').innerHTML = total;
+    }
+
+</script>
+{% endblock %}
