@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+{% load mathfilters %}
+{% block content %}
+
+<div class="preloader">
+    <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
+    </div>
+</div>
+
+<div id="main-wrapper">
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="page-content container-fluid" style="width: 60%;">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="d-flex justify-content-center">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-body printableArea">
+                            <h3><b>INVOICE</b> <span class="pull-right">#{{invoice.invoice_number}}</span></h3>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-left">
+                                        <address>
+                                            <h3> &nbsp;<b class="text-danger">{{company_name}}</b></h3>
+                                            <p class="text-muted ml-1">E 104, Dharti-2,
+                                                <br /> Nr' Viswakarma Temple,
+                                                <br /> Talaja Road,
+                                                <br /> Bhavnagar - 364002
+                                            </p>
+                                        </address>
+                                    </div>
+                                    <div class="pull-right text-right">
+                                        <address>
+                                            <h3>To,</h3>
+                                            <h4 class="font-bold">{{person.name}},</h4>
+                                            <p class="text-muted ml-4">{{person.phone}},
+                                                <br /> {{person.city}},
+                                            </p>
+                                            <p class="mt-4"><b>Invoice Date :</b> <i class="fa fa-calendar"></i>{{invoice.invoice_date}}</p>
+                                            <p><b>Due Date :</b> <i class="fa fa-calendar"></i>{{invoice.due_date}}</p>
+                                        </address>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="table-responsive mt-5" style="clear: both;">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">#</th>
+                                                    <th>Product</th>
+                                                    <th class="text-right">Unit Cost</th>
+                                                    <th class="text-right">Quantity</th>
+                                                    <th class="text-right">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for i in inventory %}
+                                                <tr>
+                                                    <td class="text-center">1</td>
+                                                    <td>{{i.sell_inventory}}</td>
+                                                    <td class="text-right">{{i.selling_price}}</td>
+                                                    <td class="text-right">{{i.quantity}}</td>
+                                                    <td class="text-right">{{ i.quantity|mul:i.selling_price }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="pull-right mt-4 text-right">
+                                        <p>Sub - Total amount: ${{sumTotal}}</p>
+                                        <p>Discount (10%) : ${{invoice.discount}} </p>
+                                        <hr>
+                                        <h3><b>Total :</b> ${{invoice.total_bill}}</h3>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                    <div class="text-right"> 
+                                        <a class="btn btn-warning" id="" href="{% url 'sell_invoice' %}" type="">
+                                            Back
+                                        </a>
+                                        <!-- <button class="btn btn-danger" type="submit"> Proceed to payment </button>
+                                        <button id="print" class="btn btn-default btn-outline" type="button"> <span><i
+                                                    class="fa fa-print"></i> Print</span> </button> -->
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

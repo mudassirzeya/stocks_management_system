@@ -1,0 +1,14 @@
+[
+  {
+    "model": "store.sellstock",
+    "pk": 39,
+    "fields": {
+      "user": 2,
+      "sell_inventory": "Black Shirt-1",
+      "quantity": 2,
+      "selling_price": 400,
+      "invoiceid": 7,
+      "event_date": "2021-05-26T12:59:58.946Z"
+    }
+  }
+]

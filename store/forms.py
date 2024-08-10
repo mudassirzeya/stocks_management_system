@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Company, Stock, BuyStock, SellStock, UserProfile
+from .models import Company, Stock, BuyStock, SellStock, UserProfile, Customer
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -38,7 +38,7 @@ class BuyStockForm(ModelForm):
 class SellStockForm(ModelForm):
     class Meta:
         model = SellStock
-        fields = ('sell_inventory', 'quantity', 'total_invoice')
+        fields = ('sell_inventory', 'quantity', 'selling_price')
 
 
 class UserprofileForm(ModelForm):
@@ -52,3 +52,9 @@ class UserForm(ModelForm):
         model = User
         fields = ('first_name', 'last_name',
                   'email')
+
+
+class CustomerForm(ModelForm):
+    class Meta:
+        model = Customer
+        fields = ('name', 'phone', 'city')

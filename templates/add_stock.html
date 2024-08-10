@@ -31,10 +31,12 @@
 </div>
 </div>
 <script>
-    document.getElementById('id_inventory').classList.add('form-control')
-    document.getElementById('id_inventory').placeholder = "Add Products"
-    document.getElementById('id_current_price').classList.add('form-control')
-    document.getElementById('id_current_price').placeholder = "Price"
+    document.getElementById('id_inventory').classList.add('form-control');
+    document.getElementById('id_inventory').placeholder = "Add Products";
+    document.getElementById('id_inventory').required = true;
+    document.getElementById('id_current_price').classList.add('form-control');
+    document.getElementById('id_current_price').placeholder = "Price";
+    document.getElementById('id_current_price').required = true;
 </script>
 {% endblock %}
 

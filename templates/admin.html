@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+{% for message in messages %}
+<p class="text-danger text-center" id="messages">{{message}}</p>
+{% endfor %}
     <!-- <h1>Admin</h1> -->
     <button type="button" class="btn btn-primary btn-circle btn-lg float-right" data-toggle="modal" data-target="#exampleModalCenter">
         <i class="fa fa-user-plus"></i>
@@ -126,14 +129,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for n in all %}                             
+                                {% for n in final %}                             
                                 <tr>
                                     <td class="title">
-                                        <a class="link" href="javascript:void(0)">{{n.inventory}}</a>
+                                        <a class="link" href="javascript:void(0)">{{n.0}}</a>
                                     </td>
-                                    <td>{{n.quantity}}</td>
-                                    <td>{{n.current_price}}</td>
-                                    <td>{{n.event_date}}</td>
+                                    <td>{{n.1}}</td>
+                                    <td>{{n.2}}</td>
+                                    <td>{{n.3}}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

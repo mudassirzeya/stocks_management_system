@@ -1,5 +1,5 @@
 {% load static %}
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html dir="ltr" lang="en">
 
 <head>
@@ -11,10 +11,15 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon.png' %}">
-    <title>Kirana-Store</title>
+    <title>CRM</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ampleadmin/" />
     <!-- Custom CSS -->
     <link href="{% static 'dist/css/style.min.css' %}" rel="stylesheet">
+
+    <!-- select-2 css file -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/libs/select2/dist/css/select2.min.css' %}">
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -51,17 +56,17 @@
                         <b class="logo-icon">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="{% static 'assets/images/logos/logo-icon.png' %}" alt="homepage" class="dark-logo" />
+                            <!-- <img src="{% static 'assets/images/logos/logo-icon.png' %}" alt="homepage" class="dark-logo" /> -->
                             <!-- Light Logo icon -->
-                            <img src="{% static 'assets/images/logos/logo-light-icon.png' %}" alt="homepage" class="light-logo" />
+                            <!-- <img src="{% static 'assets/images/logos/logo-light-icon.png' %}" alt="homepage" class="light-logo" /> -->
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="{% static 'assets/images/logos/logo-text.png' %}" alt="homepage" class="dark-logo" />
+                            <!-- <img src="{% static 'assets/images/logos/logo-text.png' %}" alt="homepage" class="dark-logo" /> -->
                             <!-- Light Logo text -->
-                            <img src="{% static 'assets/images/logos/logo-light-text.png' %}" class="light-logo" alt="homepage" />
+                            <img src="{% static 'assets/images/logos/logo-light-text.png' %}" class="light-logo" alt="homepage" height="50" width="150" />
                         </span>
                     </a>
                     <div class="d-none d-md-block text-center">
@@ -98,19 +103,19 @@
                                 <b class="logo-icon">
                                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                                     <!-- Dark Logo icon -->
-                                    <img src="{% static 'assets/images/logos/logo-icon.png' %}" alt="homepage" class="dark-logo" />
+                                    <!-- <img src="{% static 'assets/images/logos/logo-icon.png' %}" alt="homepage" class="dark-logo" /> -->
                                     <!-- Light Logo icon -->
-                                    <img src="{% static 'assets/images/logos/logo-light-icon.png' %}" alt="homepage"
-                                        class="light-logo" />
+                                    <!-- <img src="{% static 'assets/images/logos/logo-light-icon.png' %}" alt="homepage"
+                                        class="light-logo" /> -->
                                 </b>
                                 <!--End Logo icon -->
                                 <!-- Logo text -->
                                 <span class="logo-text">
                                     <!-- dark Logo text -->
-                                    <img src="{% static 'assets/images/logos/logo-text.png' %}" alt="homepage" class="dark-logo" />
+                                    <!-- <img src="{% static 'assets/images/logos/logo-text.png' %}" alt="homepage" class="dark-logo" /> -->
                                     <!-- Light Logo text -->
                                     <img src="{% static 'assets/images/logos/logo-light-text.png' %}" class="light-logo"
-                                        alt="homepage" />
+                                        alt="homepage" height="50" width="200" />
                                 </span>
                             </a>
                         </li>
@@ -207,6 +212,10 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'sell_stock' %}"
                                 aria-expanded="false"><i class="fas fa-hand-holding-usd"></i><span class="hide-menu">Sell Inventory</span></a>
                         </li>
+                        <br>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'sell_invoice' %}"
+                                aria-expanded="false"><i class="fas fa-money-bill-alt"></i><span class="hide-menu">Invoice</span></a>
+                        </li>
                        
                        
                         {% else %}
@@ -219,6 +228,10 @@
                         <br>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'sell_stock' %}" aria-expanded="false"><i
                                     class="fas fa-hand-holding-usd"></i><span class="hide-menu">Sell Inventory</span></a></li>
+                        <br>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'sell_invoice' %}"
+                                aria-expanded="false"><i class="fas fa-money-bill-alt"></i><span class="hide-menu">Invoice</span></a>
+                        </li>
                         {% endif %}
                     </ul>
                 </nav>
@@ -321,7 +334,9 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
+
     <script src="{% static 'assets/libs/jquery/dist/jquery.min.js' %}"></script>
+   
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{% static 'assets/libs/popper.js/dist/umd/popper.min.js' %}"></script>
     <script src="{% static 'assets/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
@@ -338,6 +353,18 @@
     <script src="{% static 'dist/js/sidebarmenu.js' %}"></script>
     <!--Custom JavaScript -->
     <script src="{% static 'dist/js/custom.min.js' %}"></script>
+
+    <!-- select2 cdn -->
+    <script src="{% static 'assets/libs/select2/dist/js/select2.full.min.js' %}"></script>
+    <script src="{% static 'assets/libs/select2/dist/js/select2.min.js' %}"></script>
+    <script src="{% static 'dist/js/pages/forms/select2/select2.init.js' %}"></script>
+
+    <!-- print jquery -->
+    <script src="{% static 'dist/js/pages/samplepages/jquery.PrintArea.js' %}"></script>
+ 
+
+    
+
 </body>
 
 </html>

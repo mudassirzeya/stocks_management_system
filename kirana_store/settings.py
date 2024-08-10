@@ -26,7 +26,7 @@ SECRET_KEY = '8z=i__r-_41t&r$u7oarn6by@z=8ya3cdc%4fj31ng(1qv&7_r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [
@@ -107,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -130,11 +131,15 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # smtp configuration
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'influence1405@gmail.com'
-EMAIL_HOST_PASSWORD = '@zeya123'
+EMAIL_HOST_USER = 'YourEmailID@gmail.com'  # Your Email ID
+
+# Get your email host password from "Manage my Account" in your Gmail.
+EMAIL_HOST_PASSWORD = ''

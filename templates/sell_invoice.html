@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="row d-flex justify-content-center">
+    <div class="col-md-6 col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-uppercase text-primary">Your Total Invoice</h5>
+                <div class="d-flex align-items-center mb-2 mt-4">
+                    <h2 class="mb-0 display-5"><i class="fas fa-calculator"></i></h2>
+                    <div class="ml-auto">
+                        <h2 class="mb-0 display-6"><span class="font-normal text-danger">{{total}}</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Invoice of Your Customers.</h4>
+        <!-- <nav id="navbar-example2" class="navbar navbar-light bg-light">
+                <a class="navbar-brand text-muted" href="#">Navbar</a>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#fat">First</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#mdo">Second</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Third with Dropdown</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#one">one</a>
+                            <a class="dropdown-item" href="#two">two</a>
+                            <div role="separator" class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#three">three</a>
+                        </div>
+                    </li> 
+                </ul>
+            </nav> -->
+        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="position-relative mt-2"
+            style="height: 200px; overflow: auto;">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <h4 class="card-title">Kitchen Sink</h4>
+                        <h5 class="card-subtitle">Swipe Mode, ModeSwitch, Minimap, Sortable, SortableSwitch</h5> -->
+                    <table class="tablesaw table-bordered table-hover table no-wrap" data-tablesaw-mode="swipe"
+                        data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap
+                        data-tablesaw-mode-switch>
+                        <thead>
+                            <tr>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist"
+                                    class="border">
+                                    Staff</th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col
+                                    data-tablesaw-priority="3" class="border">Invoice Number</th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col
+                                    data-tablesaw-priority="3" class="border">
+                                    Customer Id</th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">
+                                    invoice Date
+                                </th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">
+                                    Due Date
+                                </th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">
+                                    Discount
+                                </th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">
+                                    Total Bill
+                                </th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">
+                                    View Invoice
+                                </th>
+                                <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2" class="border">
+                                    Edit Invoice
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for n in invoice %}
+
+                            <tr>
+                                <td class="title">
+                                    <a class="link" href="javascript:void(0)">{{n.staff}}</a>
+                                </td>
+                                <td>{{n.invoice_number}}</td>
+                                <td>{{n.customer_id}}</td>
+                                <td>{{ n.invoice_date }}</td>
+                                <td>{{n.due_date}}</td>
+                                <td>{{n.discount}}</td>
+                                <td>{{n.total_bill}}</td>
+                                <td><a href="{% url 'view_invoice' n.id %}"><i class="fas fa-eye">View</i></a></td>
+                                <td><a href="{% url 'edit_invoice' n.id %}"><i class="fas fa-edit" >Edit</i></a></td>
+
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
