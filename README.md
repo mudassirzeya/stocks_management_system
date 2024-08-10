@@ -1,6 +1,20 @@
 ﻿# Stock & Sales Management System
 This project is a comprehensive Stock Management System built with Django. It allows organizations to manage their inventory and sales efficiently. The app provides features for managing customer data, processing sales, and generating invoices automatically.
 
+# WebApp Images
+![image](https://github.com/user-attachments/assets/8c21caad-dd6b-4e6c-813a-4815ec06f856)
+![image](https://github.com/user-attachments/assets/b3fa9a76-1421-46a0-891e-694c89ff8146)
+![image](https://github.com/user-attachments/assets/f64e729e-3993-4805-ad93-d2fca95860e3)
+![image](https://github.com/user-attachments/assets/57f54c24-e31e-4072-b5bf-159d60e9d8aa)
+![image](https://github.com/user-attachments/assets/7e16593f-a856-4aec-87c7-4f515a66b32a)
+
+
+
+
+
+
+
+
 # Features
 1) User Authentication: Users can log in with their credentials. New organizations can create an account and add team members.
 2) Inventory Management: Employees can manage stock levels by adding, updating, and deleting products.
